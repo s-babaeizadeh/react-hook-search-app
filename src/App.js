@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react"
+import Posts from "./Posts"
 
-function App() {
+import "./App.css"
+
+const App = () => {
+  const [inputValue, setValue] = useState("")
+  const [searchItem, setSearchItem] = useState(inputValue)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setSearchItem(inputValue)
+    setValue("")
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="ui two column centered grid">
+      <div className="column">
+        <div className="ui search">
+          <form onSubmit={handleSubmit}>
+            <div className="ui icon input">
+              <input
+                className="prompt"
+                type="text"
+                value={inputValue}
+                placeholder="Search"
+                onChange={(e) => setValue(e.target.value)}
+              />
+              <i className="search icon"></i>
+            </div>
+          </form>
+          <Posts searchItem={searchItem} />
+        </div>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
