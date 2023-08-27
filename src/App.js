@@ -1,17 +1,17 @@
-import React, { useState } from "react"
-import Posts from "./Posts"
+import React, { useState } from 'react';
+import Posts from './Posts';
 
-import "./App.css"
+import './App.css';
 
 const App = () => {
-  const [inputValue, setValue] = useState("")
-  const [searchItem, setSearchItem] = useState(inputValue)
+  const [inputValue, setValue] = useState('');
+  const [searchItem, setSearchItem] = useState(inputValue);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    setSearchItem(inputValue)
-    setValue("")
-  }
+    e.preventDefault();
+    setSearchItem(inputValue);
+    setValue('');
+  };
 
   return (
     <div className="ui two column centered grid">
@@ -33,7 +33,7 @@ const App = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

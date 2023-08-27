@@ -1,22 +1,27 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Posts = ({ searchItem }) => {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`https://www.reddit.com/r/${searchItem}.json`)
-
-      const json = await res.json()
-
-      setPosts(json.data.children.map((item) => item.data))
-    }
-
-    fetchData()
-  }, [searchItem, setPosts])
+      try {
+        const res = await axios.get(
+          `https://www.reddit.com/r/${searchItem}.json`
+        );
+        console.log('res', res);
+        setPosts(res.data.data.children.map((item) => item.data));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [searchItem, setPosts]);
 
   if (!posts) {
-    alert("Data is not available")
+    console.log('post', posts);
+    alert('Data is not available');
   }
 
   return (
@@ -27,7 +32,7 @@ const Posts = ({ searchItem }) => {
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Posts
+export default Posts;
