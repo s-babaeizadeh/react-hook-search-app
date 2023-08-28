@@ -10,7 +10,7 @@ const Posts = ({ searchItem }) => {
         const res = await axios.get(
           `https://www.reddit.com/r/${searchItem}.json`
         );
-        console.log('res', res);
+
         setPosts(res.data.data.children.map((item) => item.data));
       } catch (error) {
         console.error(error);
@@ -20,7 +20,6 @@ const Posts = ({ searchItem }) => {
   }, [searchItem, setPosts]);
 
   if (!posts) {
-    console.log('post', posts);
     alert('Data is not available');
   }
 
